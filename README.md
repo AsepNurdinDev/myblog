@@ -1,7 +1,3 @@
-Tentu. Karena project ini bukan sekadar blog teknologi, README-nya sebaiknya menonjolkan konsep **personal blog + digital journal + portfolio**, sekaligus menjelaskan bahwa konten dikelola melalui Filament.
-
-Berikut README yang menurut saya cocok untuk GitHub kamu. Tinggal simpan sebagai `README.md`.
-
 ````markdown
 # MyBlog
 
@@ -75,6 +71,7 @@ Text
 Quote
 ↓
 Image
+```
 ````
 
 Dengan begitu, tulisan dapat terasa lebih natural dan nyaman dibaca.
@@ -87,28 +84,28 @@ Artikel dapat memiliki blok kode khusus.
 
 Code block mendukung berbagai bahasa seperti:
 
-* PHP
-* JavaScript
-* TypeScript
-* HTML
-* CSS
-* Bash
-* Shell
-* Go
-* Python
-* SQL
-* JSON
-* YAML
-* Plain Text
+- PHP
+- JavaScript
+- TypeScript
+- HTML
+- CSS
+- Bash
+- Shell
+- Go
+- Python
+- SQL
+- JSON
+- YAML
+- Plain Text
 
 Code block juga dirancang agar memiliki:
 
-* Syntax highlighting
-* Nama bahasa
-* Filename
-* Tombol copy
-* Tampilan khusus untuk kode
-* Responsive layout
+- Syntax highlighting
+- Nama bahasa
+- Filename
+- Tombol copy
+- Tampilan khusus untuk kode
+- Responsive layout
 
 ---
 
@@ -118,8 +115,8 @@ Gambar dapat disisipkan di antara tulisan.
 
 Setiap gambar dapat memiliki:
 
-* Image
-* Caption
+- Image
+- Caption
 
 Contohnya:
 
@@ -149,8 +146,8 @@ Komentar dapat dikelola dan dimoderasi melalui admin panel.
 
 Artikel dapat dikelompokkan menggunakan:
 
-* Categories
-* Tags
+- Categories
+- Tags
 
 Sehingga pembaca dapat menemukan tulisan berdasarkan topik tertentu.
 
@@ -162,14 +159,14 @@ Selain artikel, MyBlog memiliki halaman khusus untuk menampilkan project.
 
 Setiap project dapat memiliki:
 
-* Nama
-* Slug
-* Deskripsi
-* Cover image
-* Status
-* Skills
-* Link
-* Informasi project lainnya
+- Nama
+- Slug
+- Deskripsi
+- Cover image
+- Status
+- Skills
+- Link
+- Informasi project lainnya
 
 ---
 
@@ -179,17 +176,17 @@ Informasi personal tidak di-hardcode di frontend.
 
 Profile dapat dikelola melalui admin panel, termasuk:
 
-* Nama
-* Avatar
-* Headline
-* Bio
-* Location
-* Website
-* GitHub
-* LinkedIn
-* Instagram
-* Twitter
-* Skills
+- Nama
+- Avatar
+- Headline
+- Bio
+- Location
+- Website
+- GitHub
+- LinkedIn
+- Instagram
+- Twitter
+- Skills
 
 Dengan begitu halaman About dapat diperbarui langsung dari admin panel.
 
@@ -338,14 +335,14 @@ Project
 
 ### Main Models
 
-* `User`
-* `Profile`
-* `Skill`
-* `Post`
-* `Category`
-* `Tag`
-* `Comment`
-* `Project`
+- `User`
+- `Profile`
+- `Skill`
+- `Post`
+- `Category`
+- `Tag`
+- `Comment`
+- `Project`
 
 ---
 
@@ -507,12 +504,12 @@ Hal ini memungkinkan artikel dibuat seperti sebuah catatan yang kaya akan kontek
 
 Project ini dibuat dengan beberapa tujuan:
 
-* Membuat tempat untuk menulis secara konsisten
-* Mendokumentasikan proses belajar
-* Menyimpan perjalanan membangun berbagai project
-* Membagikan pengetahuan yang mungkin berguna bagi orang lain
-* Mengarsipkan pengalaman dan cerita pribadi
-* Membuat personal branding melalui karya dan tulisan
+- Membuat tempat untuk menulis secara konsisten
+- Mendokumentasikan proses belajar
+- Menyimpan perjalanan membangun berbagai project
+- Membagikan pengetahuan yang mungkin berguna bagi orang lain
+- Mengarsipkan pengalaman dan cerita pribadi
+- Membuat personal branding melalui karya dan tulisan
 
 ---
 
@@ -520,22 +517,22 @@ Project ini dibuat dengan beberapa tujuan:
 
 Beberapa fitur yang dapat dikembangkan ke depannya:
 
-* [ ] Search artikel
-* [ ] Related articles
-* [ ] Reading time
-* [ ] Syntax highlighting yang lebih lengkap
-* [ ] Open Graph image otomatis
-* [ ] RSS Feed
-* [ ] Sitemap
-* [ ] Newsletter
-* [ ] Analytics
-* [ ] Bookmark artikel
-* [ ] Like/reaction
-* [ ] Draft preview
-* [ ] Media library
-* [ ] Improved admin dashboard
-* [ ] Dark mode
-* [ ] PWA
+- [ ] Search artikel
+- [ ] Related articles
+- [ ] Reading time
+- [ ] Syntax highlighting yang lebih lengkap
+- [ ] Open Graph image otomatis
+- [ ] RSS Feed
+- [ ] Sitemap
+- [ ] Newsletter
+- [ ] Analytics
+- [ ] Bookmark artikel
+- [ ] Like/reaction
+- [ ] Draft preview
+- [ ] Media library
+- [ ] Improved admin dashboard
+- [ ] Dark mode
+- [ ] PWA
 
 Roadmap dapat berubah seiring perkembangan project.
 
@@ -573,9 +570,9 @@ Namun, saran, feedback, dan improvement tetap sangat dihargai.
 
 Jika menemukan bug atau memiliki ide pengembangan, silakan buat:
 
-* Issue
-* Discussion
-* Pull Request
+- Issue
+- Discussion
+- Pull Request
 
 ---
 
@@ -601,8 +598,6 @@ Membangun software, menulis catatan, dan mendokumentasikan perjalanan dari nol.
 > **"Tidak semua perjalanan harus langsung menghasilkan sesuatu.
 > Kadang, mendokumentasikannya saja sudah cukup agar kita tahu sejauh apa kita telah berjalan."**
 
-
-
 ### Sedikit saran
 
 Untuk GitHub, saya justru **tidak akan membuat README terlalu teknis** seperti dokumentasi API. Project ini punya cerita personal, jadi bagian:
@@ -612,4 +607,3 @@ Untuk GitHub, saya justru **tidak akan membuat README terlalu teknis** seperti d
 penting untuk membedakannya dari repository Laravel biasa.
 
 Dan nanti setelah frontend + Filament dashboard sudah selesai, bagian `📸 Screenshots` sebaiknya kita isi screenshot **Homepage, halaman artikel, dan dashboard Filament**. Itu akan membuat repository-nya jauh lebih menarik ketika orang pertama kali membukanya.
-
