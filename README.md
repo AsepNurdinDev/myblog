@@ -1,58 +1,615 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Tentu. Karena project ini bukan sekadar blog teknologi, README-nya sebaiknya menonjolkan konsep **personal blog + digital journal + portfolio**, sekaligus menjelaskan bahwa konten dikelola melalui Filament.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Berikut README yang menurut saya cocok untuk GitHub kamu. Tinggal simpan sebagai `README.md`.
 
-## About Laravel
+````markdown
+# MyBlog
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> Personal blog, developer notes, digital journal, and a place to document the journey of building things from scratch.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+MyBlog adalah website blog pribadi yang saya bangun untuk mendokumentasikan berbagai hal yang saya pelajari, kerjakan, dan alami.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Tidak hanya tentang programming dan teknologi, blog ini juga menjadi tempat untuk menulis tentang perjalanan, pengalaman, cerita sehari-hari, proses belajar, project yang sedang dikerjakan, serta berbagai catatan yang ingin saya abadikan.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ About
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Saya percaya bahwa tidak semua hal harus langsung menjadi sesuatu yang besar.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Kadang sebuah project kecil, kesalahan saat belajar, perjalanan ke suatu tempat, atau catatan sederhana tentang apa yang sedang dipelajari bisa menjadi bagian penting dari perjalanan.
 
-## Agentic Development
+Karena itu, MyBlog dibuat sebagai sebuah **digital notebook**.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Tempat untuk:
 
-```bash
-composer require laravel/boost --dev
+- 📝 Menulis catatan dan artikel
+- 💻 Mendokumentasikan proses belajar programming
+- 🚀 Menceritakan project yang sedang atau pernah dibuat
+- 📖 Menulis pengalaman dan perjalanan
+- 💭 Membagikan opini dan pemikiran
+- 📸 Menyimpan cerita melalui tulisan dan gambar
+- 🧩 Mendokumentasikan perjalanan dari nol
 
-php artisan boost:install
+---
+
+## 🚀 Features
+
+### 📝 Article Management
+
+Artikel dapat dikelola sepenuhnya melalui admin panel.
+
+Setiap artikel mendukung:
+
+- Judul
+- Slug
+- Category
+- Cover image
+- Excerpt
+- Status publikasi
+- Waktu publikasi
+- SEO title
+- SEO description
+- Tags
+- Comments
+
+---
+
+### 🧱 Flexible Article Content
+
+Artikel tidak hanya berupa satu blok teks.
+
+Content editor menggunakan block-based system sehingga sebuah artikel dapat disusun seperti:
+
+```text
+Text
+↓
+Image
+↓
+Text
+↓
+Code
+↓
+Text
+↓
+Quote
+↓
+Image
+````
+
+Dengan begitu, tulisan dapat terasa lebih natural dan nyaman dibaca.
+
+---
+
+### 💻 Code Blocks
+
+Artikel dapat memiliki blok kode khusus.
+
+Code block mendukung berbagai bahasa seperti:
+
+* PHP
+* JavaScript
+* TypeScript
+* HTML
+* CSS
+* Bash
+* Shell
+* Go
+* Python
+* SQL
+* JSON
+* YAML
+* Plain Text
+
+Code block juga dirancang agar memiliki:
+
+* Syntax highlighting
+* Nama bahasa
+* Filename
+* Tombol copy
+* Tampilan khusus untuk kode
+* Responsive layout
+
+---
+
+### 📸 Image Blocks
+
+Gambar dapat disisipkan di antara tulisan.
+
+Setiap gambar dapat memiliki:
+
+* Image
+* Caption
+
+Contohnya:
+
+```text
+Saya mulai belajar Laravel karena ingin...
+
+[ IMAGE ]
+
+Ini adalah project pertama yang saya buat...
+
+[ CODE ]
+
+Kemudian saya mencoba...
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+### 💬 Comments
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Pengunjung dapat memberikan komentar pada artikel tanpa harus membuat akun.
 
-## Code of Conduct
+Komentar dapat dikelola dan dimoderasi melalui admin panel.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+### 📁 Categories & Tags
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Artikel dapat dikelompokkan menggunakan:
 
-## License
+* Categories
+* Tags
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Sehingga pembaca dapat menemukan tulisan berdasarkan topik tertentu.
+
+---
+
+### 🚀 Project Showcase
+
+Selain artikel, MyBlog memiliki halaman khusus untuk menampilkan project.
+
+Setiap project dapat memiliki:
+
+* Nama
+* Slug
+* Deskripsi
+* Cover image
+* Status
+* Skills
+* Link
+* Informasi project lainnya
+
+---
+
+### 👤 Personal Profile
+
+Informasi personal tidak di-hardcode di frontend.
+
+Profile dapat dikelola melalui admin panel, termasuk:
+
+* Nama
+* Avatar
+* Headline
+* Bio
+* Location
+* Website
+* GitHub
+* LinkedIn
+* Instagram
+* Twitter
+* Skills
+
+Dengan begitu halaman About dapat diperbarui langsung dari admin panel.
+
+---
+
+## 🛠️ Tech Stack
+
+MyBlog dibangun menggunakan:
+
+| Technology   | Usage                   |
+| ------------ | ----------------------- |
+| Laravel      | Backend & Web Framework |
+| PHP          | Programming Language    |
+| MySQL        | Database                |
+| Blade        | Frontend Templating     |
+| Tailwind CSS | UI Styling              |
+| Filament     | Admin Panel / CMS       |
+| Vite         | Frontend Asset Bundling |
+
+---
+
+## 🏗️ Architecture
+
+Project menggunakan pendekatan Laravel MVC dengan Filament sebagai CMS.
+
+```text
+                    ┌─────────────────┐
+                    │     Visitor     │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │     Laravel     │
+                    │   Controllers   │
+                    └────────┬────────┘
+                             │
+                ┌────────────┴────────────┐
+                ▼                         ▼
+        ┌──────────────┐          ┌──────────────┐
+        │    Models    │          │    Blade     │
+        │              │          │    Views     │
+        └──────┬───────┘          └──────────────┘
+               │
+               ▼
+        ┌──────────────┐
+        │    MySQL     │
+        └──────────────┘
+
+
+              ADMIN
+                │
+                ▼
+        ┌──────────────┐
+        │   Filament   │
+        │    Admin     │
+        └──────┬───────┘
+               │
+               ▼
+        Manage Content
+```
+
+---
+
+## 📂 Project Structure
+
+Struktur utama project:
+
+```text
+app/
+├── Filament/
+│   ├── Resources/
+│   │   ├── Categories/
+│   │   ├── Comments/
+│   │   ├── Posts/
+│   │   ├── Profiles/
+│   │   ├── Projects/
+│   │   ├── Skills/
+│   │   └── Tags/
+│   │
+│   └── Widgets/
+│
+├── Http/
+│   └── Controllers/
+│       ├── CategoryController.php
+│       ├── CommentController.php
+│       ├── HomeController.php
+│       ├── PostController.php
+│       ├── ProfileController.php
+│       └── ProjectController.php
+│
+└── Models/
+    ├── Category.php
+    ├── Comment.php
+    ├── Enums/
+    ├── Post.php
+    ├── Profile.php
+    ├── Project.php
+    ├── Skill.php
+    ├── Tag.php
+    └── User.php
+
+resources/
+├── css/
+├── js/
+└── views/
+    ├── categories/
+    ├── components/
+    ├── home/
+    ├── layouts/
+    ├── posts/
+    ├── profile/
+    └── projects/
+
+database/
+├── migrations/
+└── seeders/
+```
+
+---
+
+## 🗃️ Database Relationship
+
+Secara umum relationship yang digunakan:
+
+```text
+User
+ │
+ └── Profile
+       │
+       └── Skills
+
+
+Category
+ │
+ └── Posts
+       │
+       ├── Tags
+       │
+       └── Comments
+
+
+Project
+ │
+ └── Skills
+```
+
+### Main Models
+
+* `User`
+* `Profile`
+* `Skill`
+* `Post`
+* `Category`
+* `Tag`
+* `Comment`
+* `Project`
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/your-username/myblog.git
+cd myblog
+```
+
+### 2. Install PHP Dependencies
+
+```bash
+composer install
+```
+
+### 3. Install Frontend Dependencies
+
+```bash
+npm install
+```
+
+### 4. Environment
+
+Copy `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Kemudian sesuaikan konfigurasi database:
+
+```env
+APP_NAME=MyBlog
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=myblog_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 6. Run Migration
+
+```bash
+php artisan migrate
+```
+
+### 7. Seed Database
+
+```bash
+php artisan db:seed
+```
+
+### 8. Storage Link
+
+```bash
+php artisan storage:link
+```
+
+### 9. Build Frontend
+
+```bash
+npm run build
+```
+
+---
+
+## 💻 Local Development
+
+Jalankan Laravel:
+
+```bash
+php artisan serve
+```
+
+Untuk development frontend:
+
+```bash
+npm run dev
+```
+
+Kemudian buka:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## 🔐 Admin Panel
+
+Content website dikelola melalui Filament.
+
+Admin panel tersedia di:
+
+```text
+/admin
+```
+
+Dari admin panel, administrator dapat mengelola:
+
+```text
+Dashboard
+│
+├── Articles
+├── Categories
+├── Tags
+├── Comments
+│
+├── Projects
+├── Skills
+│
+└── Profile
+```
+
+Tidak diperlukan login bagi pengunjung yang hanya ingin membaca artikel.
+
+Authentication hanya digunakan untuk area administrasi.
+
+---
+
+## ✍️ Writing Articles
+
+Artikel dibuat menggunakan content builder.
+
+Contoh struktur artikel:
+
+```text
+┌─────────────────────────────┐
+│ Text                        │
+├─────────────────────────────┤
+│ Image                       │
+├─────────────────────────────┤
+│ Text                        │
+├─────────────────────────────┤
+│ Code                        │
+├─────────────────────────────┤
+│ Text                        │
+├─────────────────────────────┤
+│ Quote                       │
+└─────────────────────────────┘
+```
+
+Hal ini memungkinkan artikel dibuat seperti sebuah catatan yang kaya akan konteks, bukan hanya kumpulan paragraf.
+
+---
+
+## 🎯 Goals
+
+Project ini dibuat dengan beberapa tujuan:
+
+* Membuat tempat untuk menulis secara konsisten
+* Mendokumentasikan proses belajar
+* Menyimpan perjalanan membangun berbagai project
+* Membagikan pengetahuan yang mungkin berguna bagi orang lain
+* Mengarsipkan pengalaman dan cerita pribadi
+* Membuat personal branding melalui karya dan tulisan
+
+---
+
+## 🗺️ Roadmap
+
+Beberapa fitur yang dapat dikembangkan ke depannya:
+
+* [ ] Search artikel
+* [ ] Related articles
+* [ ] Reading time
+* [ ] Syntax highlighting yang lebih lengkap
+* [ ] Open Graph image otomatis
+* [ ] RSS Feed
+* [ ] Sitemap
+* [ ] Newsletter
+* [ ] Analytics
+* [ ] Bookmark artikel
+* [ ] Like/reaction
+* [ ] Draft preview
+* [ ] Media library
+* [ ] Improved admin dashboard
+* [ ] Dark mode
+* [ ] PWA
+
+Roadmap dapat berubah seiring perkembangan project.
+
+---
+
+## 📸 Screenshots
+
+> Screenshots akan ditambahkan setelah tampilan frontend dan admin dashboard selesai.
+
+### Homepage
+
+```text
+Coming soon...
+```
+
+### Article
+
+```text
+Coming soon...
+```
+
+### Admin Dashboard
+
+```text
+Coming soon...
+```
+
+---
+
+## 🤝 Contributing
+
+Project ini merupakan personal project.
+
+Namun, saran, feedback, dan improvement tetap sangat dihargai.
+
+Jika menemukan bug atau memiliki ide pengembangan, silakan buat:
+
+* Issue
+* Discussion
+* Pull Request
+
+---
+
+## 📄 License
+
+Project ini dibuat untuk kebutuhan personal.
+
+Source code dapat digunakan sebagai referensi pembelajaran, tetapi beberapa konten, tulisan, gambar, dan aset personal di dalam project bukan untuk digunakan ulang tanpa izin.
+
+---
+
+## 👨‍💻 Author
+
+**Asep Nurdin**
+
+Software Engineer & Programmer
+Founder of Mahakarya Digital
+
+Membangun software, menulis catatan, dan mendokumentasikan perjalanan dari nol.
+
+---
+
+> **"Tidak semua perjalanan harus langsung menghasilkan sesuatu.
+> Kadang, mendokumentasikannya saja sudah cukup agar kita tahu sejauh apa kita telah berjalan."**
+
+
+
+### Sedikit saran
+
+Untuk GitHub, saya justru **tidak akan membuat README terlalu teknis** seperti dokumentasi API. Project ini punya cerita personal, jadi bagian:
+
+> **About → Goals → Writing Articles → Author**
+
+penting untuk membedakannya dari repository Laravel biasa.
+
+Dan nanti setelah frontend + Filament dashboard sudah selesai, bagian `📸 Screenshots` sebaiknya kita isi screenshot **Homepage, halaman artikel, dan dashboard Filament**. Itu akan membuat repository-nya jauh lebih menarik ketika orang pertama kali membukanya.
+
