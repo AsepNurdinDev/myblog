@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>asepshan — Blog & Notes</title>
+    <!-- Tailwind CSS + Typography Plugin -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <!-- Alpine.js untuk Interaktivitas SPA -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+</head>
+<body 
+    x-data="{ 
+        page: 'beranda', 
+        selectedCategory: 'Semua',
+        selectedPost: null,
+        categories: ['Semua', 'Teknologi', 'Desain', 'Engineering'],
+        posts: [
+            {
+                id: 1,
+                title: 'Membangun Sistem Arsitektur Web yang Sederhana dan Efisien',
+                category: 'Teknologi',
+                date: '30 Agustus 2026',
+                readTime: '5 min baca',
+                coverImage: 'http://googleusercontent.com/image_collection/image_retrieval/5006624349759724255_0',
+                excerpt: 'Kadang-kadang, solusi terbaik dari sebuah masalah perangkat lunak adalah tidak menambah kompleksitas baru, melainkan menyederhanakannya.',
+                content: `
+                    <p>Dalam dunia pengembangan perangkat lunak saat ini, kita sering kali terjebak untuk menggunakan teknologi terbaru yang serba cepat. Namun, penting untuk kembali ke fondasi dasar: bagaimana membuat pembaca dan pengguna merasa nyaman saat menikmati konten kita.</p>
+                    
+                    <figure class='my-8'>
+                        <img src='http://googleusercontent.com/image_collection/image_retrieval/5006624349759724255_0' alt='Workspace Minimalis' class='rounded-xl border border-zinc-200 w-full object-cover max-h-[400px]'>
+                        <figcaption class='text-center text-xs text-zinc-500 mt-2 font-sans'>Gambar 1. Ruang kerja minimalis untuk menjaga fokus dalam perancangan arsitektur sistem.</figcaption>
+                    </figure>
+
+                    <h2>Keindahan Sederhana dalam Kode</h2>
+                    <p>Desain monokromatik bukan berarti membosankan. Dengan membatasi palet warna menjadi hitam, putih, dan tingkatan warna abu-abu (<em>gray scale</em>), fokus penuh diberikan kepada tipografi dan konten tulisan itu sendiri.</p>
+                    
+                    <ul>
+                        <li>Kontras yang cukup antara teks dan latar belakang.</li>
+                        <li>Penggunaan tinggi baris (<em>line-height</em>) yang lega agar mata tidak cepat lelah.</li>
+                        <li>Lebar kolom baca yang terukur (maksimal 65–75 karakter per baris).</li>
+                    </ul>
+
+                    <figure class='my-8'>
+                        <img src='http://googleusercontent.com/image_collection/image_retrieval/16733013447024510543_0' alt='Code Editor Interface' class='rounded-xl border border-zinc-200 w-full object-cover max-h-[400px]'>
+                        <figcaption class='text-center text-xs text-zinc-500 mt-2 font-sans'>Gambar 2. Tampilan antarmuka kode yang bersih memudahkan identifikasi bug dan pengujian.</figcaption>
+                    </figure>
+
+                    <blockquote><p>“Simplicity is prerequisite for reliability.” — Edsger W. Dijkstra</p></blockquote>
+                    
+                    <p>Dengan menerapkan prinsip dasar ini, aplikasi tidak hanya berjalan lebih stabil, tetapi juga lebih mudah dipelihara dalam jangka panjang oleh tim yang berkembang.</p>
+                `
+            },
+            {
+                id: 2,
+                title: 'Panduan Minimalisme Tipografi dalam Pembuatan Antarmuka UI',
+                category: 'Desain',
+                date: '15 Agustus 2026',
+                readTime: '4 min baca',
+                coverImage: 'http://googleusercontent.com/image_collection/image_retrieval/13755612408846578788_0',
+                excerpt: 'Bagaimana memilih perpaduan font serif dan sans-serif yang pas untuk meningkatkan kenyamanan membaca teks panjang.',
+                content: `
+                    <p>Tipografi adalah 95% dari desain web. Memilih kombinasi huruf yang tepat sangat menentukan apakah pengunjung akan betah membaca artikel Anda sampai habis atau langsung menutup tab.</p>
+                    
+                    <figure class='my-8'>
+                        <img src='http://googleusercontent.com/image_collection/image_retrieval/13755612408846578788_0' alt='Eksperimen Tipografi' class='rounded-xl border border-zinc-200 w-full object-cover max-h-[400px]'>
+                        <figcaption class='text-center text-xs text-zinc-500 mt-2 font-sans'>Gambar 1. Eksperimen hirarki tipografi dengan pendekatan kisi-kisi (grid system).</figcaption>
+                    </figure>
+
+                    <h2>Perpaduan Sans-Serif dan Serif</h2>
+                    <p>Pendekatan klasik yang paling aman adalah menggunakan font Sans-Serif untuk elemen antarmuka, judul, dan navigasi (seperti <strong>Inter</strong>), sementara bagian tubuh tulisan menggunakan font Serif (seperti <strong>Merriweather</strong>).</p>
+
+                    <figure class='my-8'>
+                        <img src='http://googleusercontent.com/image_collection/image_retrieval/17325435809298764399_0' alt='Catatan dan Sketsa Desain' class='rounded-xl border border-zinc-200 w-full object-cover max-h-[400px]'>
+                        <figcaption class='text-center text-xs text-zinc-500 mt-2 font-sans'>Gambar 2. Proses sketsa layout dan pembuatan catatan hirarki teks sebelum eksekusi digital.</figcaption>
+                    </figure>
+
+                    <p>Font Serif membantu ritme membaca secara horisontal pada teks paragraf yang panjang, menciptakan pengalaman seperti membaca jurnal cetak eksklusif.</p>
+                `
+            },
+            {
+                id: 3,
+                title: 'Catatan Perjalanan Membangun Microservices Berperforma Tinggi',
+                category: 'Engineering',
+                date: '02 Juli 2026',
+                readTime: '7 min baca',
+                coverImage: 'http://googleusercontent.com/image_collection/image_retrieval/16733013447024510543_0',
+                excerpt: 'Evaluasi pengunaan gRPC dan Redis caching dalam menangani lonjakan trafik secara efisien tanpa kompromi.',
+                content: `
+                    <p>Skalabilitas bukan hanya tentang menambah jumlah server, melainkan juga mengoptimalkan jalur komunikasi antar-layanan secara presisi.</p>
+                    
+                    <figure class='my-8'>
+                        <img src='http://googleusercontent.com/image_collection/image_retrieval/16733013447024510543_0' alt='Monitoring Dashboard' class='rounded-xl border border-zinc-200 w-full object-cover max-h-[400px]'>
+                        <figcaption class='text-center text-xs text-zinc-500 mt-2 font-sans'>Gambar 1. Pengujian performa dan latency antrean request microservices.</figcaption>
+                    </figure>
+
+                    <h2>Kenapa Menggunakan gRPC?</h2>
+                    <p>Dibandingkan dengan RESTful API konvensional berbasis JSON, gRPC menggunakan Protocol Buffers yang jauh lebih ringan dan cepat dalam proses serialisasi data.</p>
+                    
+                    <figure class='my-8'>
+                        <img src='http://googleusercontent.com/image_collection/image_retrieval/5006624349759724255_0' alt='Infrastructure Desk Setup' class='rounded-xl border border-zinc-200 w-full object-cover max-h-[400px]'>
+                        <figcaption class='text-center text-xs text-zinc-500 mt-2 font-sans'>Gambar 2. Stasiun kerja infrastruktur server backend.</figcaption>
+                    </figure>
+
+                    <p>Ditambah dengan penerapan layer Redis caching pada query database yang berulang, beban server backend dapat dikurangi hingga lebih dari 60%.</p>
+                `
+            }
+        ],
+        get filteredPosts() {
+            if (this.selectedCategory === 'Semua') return this.posts;
+            return this.posts.filter(p => p.category === this.selectedCategory);
+        },
+        openArticle(post) {
+            this.selectedPost = post;
+            this.page = 'detail';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        },
+        navigate(destination) {
+            this.page = destination;
+            this.selectedPost = null;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }"
+    class="bg-zinc-50 text-zinc-900 font-sans antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"
+>
+
+    <!-- Navigation Header -->
+    <header class="border-b border-zinc-200 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <button @click="navigate('beranda')" class="font-bold text-xl tracking-tight hover:opacity-70 transition flex items-center gap-2">
+                <span class="w-3 h-3 bg-black rounded-full inline-block"></span>
+                asepshan.
+            </button>
+            <nav class="flex gap-6 text-sm font-medium text-zinc-600">
+                <button 
+                    @click="navigate('beranda')" 
+                    :class="page === 'beranda' || page === 'detail' ? 'text-zinc-900 font-bold border-b-2 border-zinc-900 pb-1' : 'hover:text-zinc-900 transition'">
+                    Artikel
+                </button>
+                <button 
+                    @click="navigate('proyek')" 
+                    :class="page === 'proyek' ? 'text-zinc-900 font-bold border-b-2 border-zinc-900 pb-1' : 'hover:text-zinc-900 transition'">
+                    Proyek
+                </button>
+                <button 
+                    @click="navigate('tentang')" 
+                    :class="page === 'tentang' ? 'text-zinc-900 font-bold border-b-2 border-zinc-900 pb-1' : 'hover:text-zinc-900 transition'">
+                    Tentang
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-5xl mx-auto px-6 py-10 w-full">
+
+        <!-- 1. HALAMAN BERANDA / LIST ARTIKEL DENGAN KARTU -->
+        <section x-show="page === 'beranda'" x-transition.opacity>
+            <!-- Hero Banner & Filter -->
+            <div class="mb-10 pb-8 border-b border-zinc-200 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 text-zinc-900">Tulisan & Catatan</h1>
+                    <p class="text-zinc-600 max-w-lg">Opini, panduan, dan catatan pengalaman dalam rekayasa perangkat lunak serta desain antarmuka.</p>
+                </div>
+
+                <!-- Category Filter Pills -->
+                <div class="flex flex-wrap gap-2">
+                    <template x-for="cat in categories" :key="cat">
+                        <button 
+                            @click="selectedCategory = cat"
+                            :class="selectedCategory === cat ? 'bg-zinc-900 text-white' : 'bg-white text-zinc-600 border border-zinc-200 hover:border-zinc-400'"
+                            class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition"
+                            x-text="cat"
+                        ></button>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Grid Card Artikel -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <template x-for="post in filteredPosts" :key="post.id">
+                    <article 
+                        @click="openArticle(post)" 
+                        class="group cursor-pointer bg-white rounded-2xl border border-zinc-200 overflow-hidden hover:shadow-xl hover:border-zinc-400 transition-all duration-300 flex flex-col justify-between">
+                        
+                        <div>
+                            <!-- Card Image Thumbnail -->
+                            <div class="aspect-video w-full overflow-hidden bg-zinc-100 border-b border-zinc-100">
+                                <img 
+                                    :src="post.coverImage" 
+                                    :alt="post.title"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500 ease-out"
+                                >
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="p-5">
+                                <div class="flex items-center gap-2 text-xs text-zinc-500 mb-3">
+                                    <span class="font-bold text-zinc-900 uppercase tracking-wider text-[10px] bg-zinc-100 border border-zinc-200 px-2 py-0.5 rounded-md" x-text="post.category"></span>
+                                    <span>•</span>
+                                    <span x-text="post.readTime"></span>
+                                </div>
+
+                                <h2 class="text-lg font-bold text-zinc-900 group-hover:text-black leading-snug mb-2 line-clamp-2" x-text="post.title"></h2>
+                                <p class="text-zinc-600 text-sm leading-relaxed line-clamp-3 font-sans" x-text="post.excerpt"></p>
+                            </div>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="px-5 pb-5 pt-2 flex items-center justify-between text-xs text-zinc-400 font-medium border-t border-zinc-50">
+                            <time x-text="post.date"></time>
+                            <span class="text-zinc-900 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                                Baca <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </span>
+                        </div>
+
+                    </article>
+                </template>
+            </div>
+        </section>
+
+
+        <!-- 2. HALAMAN DETAIL ARTIKEL (BANYAK FOTO) -->
+        <section x-show="page === 'detail' && selectedPost" x-transition.opacity class="max-w-3xl mx-auto">
+            <!-- Tombol Kembali -->
+            <button @click="navigate('beranda')" class="inline-flex items-center gap-2 text-sm text-zinc-600 hover:text-zinc-900 mb-8 transition font-medium bg-white border border-zinc-200 px-4 py-2 rounded-full hover:border-zinc-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                Kembali ke daftar artikel
+            </button>
+
+            <article class="bg-white p-6 sm:p-10 rounded-2xl border border-zinc-200 shadow-sm">
+                <!-- Header Artikel -->
+                <header class="mb-8">
+                    <div class="flex items-center gap-3 text-sm text-zinc-500 mb-3">
+                        <span class="font-bold text-zinc-900 uppercase tracking-wider text-xs bg-zinc-100 border border-zinc-200 px-2.5 py-1 rounded-md" x-text="selectedPost?.category"></span>
+                        <span>•</span>
+                        <time x-text="selectedPost?.date"></time>
+                        <span>•</span>
+                        <span x-text="selectedPost?.readTime"></span>
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 leading-tight mb-4" x-text="selectedPost?.title"></h1>
+                    <p class="text-lg text-zinc-600 leading-relaxed font-serif italic" x-text="selectedPost?.excerpt"></p>
+                </header>
+
+                <!-- Featured Header Image -->
+                <div class="mb-8 rounded-xl overflow-hidden border border-zinc-200">
+                    <img :src="selectedPost?.coverImage" :alt="selectedPost?.title" class="w-full h-auto max-h-[450px] object-cover">
+                </div>
+
+                <!-- Content Area (HTML Rendered) -->
+                <div class="prose prose-zinc max-w-none prose-lg font-serif prose-headings:font-sans prose-headings:font-bold prose-a:text-black prose-a:underline hover:prose-a:text-zinc-600 prose-code:font-mono prose-code:text-sm border-b border-zinc-200 pb-10" x-html="selectedPost?.content"></div>
+
+                <!-- Penulis Bio -->
+                <div class="pt-8 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-zinc-900 text-white flex items-center justify-center font-bold font-sans text-lg">
+                        A
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-zinc-900 font-sans">Ditulis oleh asepshan</h4>
+                        <p class="text-xs text-zinc-500 font-sans mt-0.5">Software Engineer & Technical Writer. Suka berbagi seputar arsitektur web dan desain bersih.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+
+        <!-- 3. HALAMAN PROYEK -->
+        <section x-show="page === 'proyek'" x-transition.opacity>
+            <div class="mb-10 pb-8 border-b border-zinc-200">
+                <h1 class="text-3xl font-extrabold tracking-tight mb-2 text-zinc-900">Proyek Pilihan</h1>
+                <p class="text-zinc-600">Kumpulan aplikasi web, tools, dan repositori terbuka yang telah dikembangkan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card Proyek 1 -->
+                <div class="bg-white border border-zinc-200 p-6 rounded-2xl hover:border-zinc-400 hover:shadow-lg transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-bold text-xl text-zinc-900">PasarSync Platform</h3>
+                            <span class="text-xs bg-zinc-100 text-zinc-800 px-2.5 py-1 rounded-md font-mono border border-zinc-200">Web App</span>
+                        </div>
+                        <p class="text-zinc-600 text-sm leading-relaxed mb-6">Platform manajemen inventaris dan agregasi pesanan multi-channel untuk UMKM Indonesia.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-zinc-100">
+                        <div class="flex gap-2 text-xs font-mono text-zinc-500">
+                            <span>#Go</span> <span>#Next.js</span> <span>#Redis</span>
+                        </div>
+                        <a href="#" class="text-xs font-bold text-black hover:underline inline-flex items-center gap-1">Lihat Detail &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Card Proyek 2 -->
+                <div class="bg-white border border-zinc-200 p-6 rounded-2xl hover:border-zinc-400 hover:shadow-lg transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-bold text-xl text-zinc-900">Tenangin Platform</h3>
+                            <span class="text-xs bg-zinc-100 text-zinc-800 px-2.5 py-1 rounded-md font-mono border border-zinc-200">Full Stack</span>
+                        </div>
+                        <p class="text-zinc-600 text-sm leading-relaxed mb-6">Aplikasi kesehatan mental digital berbasis web dengan fitur daily mood tracking dan journaling interaktif.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-zinc-100">
+                        <div class="flex gap-2 text-xs font-mono text-zinc-500">
+                            <span>#Tailwind</span> <span>#Go</span> <span>#PostgreSQL</span>
+                        </div>
+                        <a href="#" class="text-xs font-bold text-black hover:underline inline-flex items-center gap-1">Lihat Detail &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4. HALAMAN TENTANG -->
+        <section x-show="page === 'tentang'" x-transition.opacity class="max-w-3xl mx-auto">
+            <div class="bg-white p-8 sm:p-10 rounded-2xl border border-zinc-200">
+                <h1 class="text-3xl font-extrabold tracking-tight mb-6 text-zinc-900">Tentang Saya</h1>
+                <div class="prose prose-zinc prose-lg font-serif">
+                    <p>Halo, saya <strong>asepshan</strong>. Saya seorang pengembang perangkat lunak yang berfokus pada arsitektur backend, efisiensi antarmuka web, dan pengembangan sistem terdistribusi.</p>
+                    <p>Saya menyukai antarmuka yang bersih tanpa ornamen berlebih, arsitektur kode yang modular, serta dokumentasi teknis yang ringkas dan nyaman dibaca.</p>
+                    
+                    <hr class="my-8 border-zinc-200">
+
+                    <h3 class="font-sans font-bold text-xl text-zinc-900">Teknologi & Tools Utama:</h3>
+                    <div class="not-prose grid grid-cols-2 sm:grid-cols-3 gap-3 font-sans text-sm mt-4">
+                        <div class="bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-center font-medium">Go (Golang)</div>
+                        <div class="bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-center font-medium">Python & FastAPI</div>
+                        <div class="bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-center font-medium">PHP & Laravel</div>
+                        <div class="bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-center font-medium">TypeScript / Next.js</div>
+                        <div class="bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-center font-medium">Docker & K8s</div>
+                        <div class="bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-center font-medium">PostgreSQL & Redis</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-200 py-8 bg-white text-center text-sm text-zinc-500">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 asepshan. Hak cipta dilindungi.</p>
+            <div class="flex gap-6 font-medium">
+                <a href="#" class="hover:text-zinc-900 transition">GitHub</a>
+                <a href="#" class="hover:text-zinc-900 transition">Twitter / X</a>
+                <a href="#" class="hover:text-zinc-900 transition">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

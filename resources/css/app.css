@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none !important;
+}
+
+/*
+ * Article typography.
+ *
+ * We don't know whether @tailwindcss/typography is installed in this
+ * project, so rather than relying on a `prose` class that might not
+ * exist, these rules style the RichEditor / Builder output directly.
+ * Applied via the `.article-content` wrapper on posts/show and
+ * projects/show, and `.prose-block` on each individual text block.
+ */
+@layer components {
+    .article-content,
+    .prose-block {
+        @apply text-[1.0625rem] leading-[1.8] text-stone-700;
+    }
+
+    .article-content > * + *,
+    .prose-block > * + * {
+        @apply mt-5;
+    }
+
+    .article-content h1,
+    .prose-block h1 {
+        @apply mt-10 text-3xl font-bold leading-snug text-stone-900;
+    }
+
+    .article-content h2,
+    .prose-block h2 {
+        @apply mt-10 text-2xl font-bold leading-snug text-stone-900;
+    }
+
+    .article-content h3,
+    .prose-block h3 {
+        @apply mt-8 text-xl font-semibold leading-snug text-stone-900;
+    }
+
+    .article-content h4,
+    .prose-block h4 {
+        @apply mt-6 text-lg font-semibold text-stone-900;
+    }
+
+    .article-content p,
+    .prose-block p {
+        @apply leading-[1.8];
+    }
+
+    .article-content a,
+    .prose-block a {
+        @apply font-medium text-amber-700 underline decoration-amber-300 underline-offset-2 hover:text-amber-900;
+    }
+
+    .article-content strong,
+    .prose-block strong {
+        @apply font-semibold text-stone-900;
+    }
+
+    .article-content ul,
+    .prose-block ul {
+        @apply list-disc space-y-2 pl-6;
+    }
+
+    .article-content ol,
+    .prose-block ol {
+        @apply list-decimal space-y-2 pl-6;
+    }
+
+    .article-content li,
+    .prose-block li {
+        @apply leading-[1.8];
+    }
+
+    .article-content blockquote,
+    .prose-block blockquote {
+        @apply border-l-4 border-stone-300 pl-4 italic text-stone-600;
+    }
+
+    .article-content code,
+    .prose-block code {
+        @apply rounded bg-stone-100 px-1.5 py-0.5 font-mono text-[0.875em] text-stone-800;
+    }
+
+    .article-content pre code,
+    .prose-block pre code {
+        @apply bg-transparent px-0 py-0;
+    }
+
+    .article-content img,
+    .prose-block img {
+        @apply rounded-lg;
+    }
+
+    .article-content hr,
+    .prose-block hr {
+        @apply my-10 border-stone-200;
+    }
+
+    .article-content table,
+    .prose-block table {
+        @apply w-full border-collapse text-sm;
+    }
+
+    .article-content th,
+    .prose-block th {
+        @apply border border-stone-200 bg-stone-50 px-3 py-2 text-left font-semibold text-stone-700;
+    }
+
+    .article-content td,
+    .prose-block td {
+        @apply border border-stone-200 px-3 py-2;
+    }
+}
+
+/* Prism.js theme override so code blocks match the site's rounded/dark card */
+.article-content pre[class*='language-'] {
+    background: transparent;
+    margin: 0;
+}
