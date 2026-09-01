@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('title', config('app.name', 'Personal Blog') . ' — Catatan, Journal & Project Portfolio')
-@section('meta_description', $profile?->clean_bio ?? 'Ruang berbagi catatan teknis, jurnal perjalanan software
+@section('meta_description',
+    $profile?->clean_bio ??
+    'Ruang berbagi catatan teknis, jurnal perjalanan software
     engineering, dan portfolio proyek.')
 
 @section('content')
@@ -62,6 +64,21 @@
             </form>
         </section>
 
+        {{-- Categories Section --}}
+        @if ($categories->isNotEmpty())
+            <section class="mt-16">
+                <h2 class="mb-4 text-2xl font-extrabold tracking-tight text-stone-900">Topik & Kategori</h2>
+                <div class="flex flex-wrap gap-2">
+                    @foreach ($categories as $category)
+                        <a href="{{ route('categories.show', $category) }}"
+                            class="rounded-lg border border-stone-200/80 bg-white px-3.5 py-1.5 text-xs font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-50 hover:text-stone-900">
+                            {{ $category->name }}
+                        </a>
+                    @endforeach
+                </div>
+            </section>
+        @endif
+
         {{-- Latest Notes Section --}}
         <section class="mt-14">
             <div class="mb-6 flex items-end justify-between">
@@ -110,20 +127,7 @@
             </div>
         </section>
 
-        {{-- Categories Section --}}
-        @if ($categories->isNotEmpty())
-            <section class="mt-16">
-                <h2 class="mb-4 text-2xl font-extrabold tracking-tight text-stone-900">Topik & Kategori</h2>
-                <div class="flex flex-wrap gap-2">
-                    @foreach ($categories as $category)
-                        <a href="{{ route('categories.show', $category) }}"
-                            class="rounded-lg border border-stone-200/80 bg-white px-3.5 py-1.5 text-xs font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-50 hover:text-stone-900">
-                            {{ $category->name }}
-                        </a>
-                    @endforeach
-                </div>
-            </section>
-        @endif
+
 
         {{-- About / Profile Callout --}}
         <section class="mt-16 rounded-2xl border border-stone-200/80 bg-white p-8 text-center shadow-sm sm:p-10">
