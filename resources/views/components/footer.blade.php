@@ -69,7 +69,7 @@
                 &copy; {{ now()->year }} AsepBlog. Semua hak cipta dilindungi.
             </p>
             <p class="mt-2 text-xs text-stone-400 sm:mt-0">
-                Dibuat menggunakan Laravel & Tailwind CSS.
+                Crafted with clean code & continuous learning.
             </p>
         </div>
     </div>
