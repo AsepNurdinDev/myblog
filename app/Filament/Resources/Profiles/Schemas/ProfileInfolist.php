@@ -111,6 +111,8 @@ class ProfileInfolist
                                     ->icon('heroicon-o-photo')
                                     ->schema([
                                         ImageEntry::make('avatar')
+                                            ->disk('public')
+                                            ->visibility('public')
                                             ->hiddenLabel()
                                             ->circular()
                                             ->alignCenter()

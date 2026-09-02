@@ -87,7 +87,7 @@
         @if ($project->thumbnail)
             <div class="mb-12 overflow-hidden rounded-2xl bg-stone-100 shadow-sm max-h-[520px]">
                 <img
-                    src="{{ Storage::url($project->thumbnail) }}"
+                    src="{{ Storage::disk('public')->url($project->thumbnail) }}"
                     alt="{{ $project->title }}"
                     class="h-full w-full object-cover"
                 >

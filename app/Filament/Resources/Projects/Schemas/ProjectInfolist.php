@@ -115,6 +115,8 @@ class ProjectInfolist
                                     ->icon('heroicon-o-photo')
                                     ->schema([
                                         ImageEntry::make('thumbnail')
+                                            ->disk('public')
+                                            ->visibility('public')
                                             ->hiddenLabel()
                                             ->placeholder('Tidak ada gambar thumbnail'),
                                     ]),

@@ -18,7 +18,7 @@
     @if ($post->cover_image)
         <a href="{{ route('posts.show', $post) }}" class="block aspect-[16/9] w-full overflow-hidden bg-stone-100">
             <img
-                src="{{ Storage::url($post->cover_image) }}"
+                src="{{ Storage::disk('public')->url($post->cover_image) }}"
                 alt="{{ $post->title }}"
                 loading="lazy"
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"

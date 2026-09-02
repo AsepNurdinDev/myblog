@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,11 +16,12 @@ class ProjectsTable
     {
         return $table
             ->columns([
+                ImageColumn::make('thumbnail')
+                    ->disk('public')
+                    ->visibility('public'),
                 TextColumn::make('title')
                     ->searchable(),
                 TextColumn::make('slug')
-                    ->searchable(),
-                TextColumn::make('thumbnail')
                     ->searchable(),
                 TextColumn::make('url')
                     ->searchable(),

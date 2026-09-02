@@ -12,7 +12,7 @@
         {{-- Hero / Personal Branding Section --}}
         <section class="flex flex-col items-start gap-6 border-b border-stone-200 pb-12 sm:flex-row sm:items-center">
             @if ($profile?->avatar)
-                <img src="{{ Storage::url($profile->avatar) }}" alt="{{ $profile->user->name ?? config('app.name') }}"
+                <img src="{{ Storage::disk('public')->url($profile->avatar) }}" alt="{{ $profile->user->name ?? config('app.name') }}"
                     class="h-24 w-24 shrink-0 rounded-full border border-stone-200 object-cover shadow-sm">
             @else
                 <div

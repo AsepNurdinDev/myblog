@@ -41,7 +41,7 @@
         {{-- Cover Image --}}
         @if ($post->cover_image)
             <div class="mb-12 overflow-hidden rounded-2xl bg-stone-100 shadow-sm max-h-[520px]">
-                <img src="{{ Storage::url($post->cover_image) }}" alt="{{ $post->title }}"
+                <img src="{{ Storage::disk('public')->url($post->cover_image) }}" alt="{{ $post->title }}"
                     class="h-full w-full object-cover">
             </div>
         @endif
@@ -66,7 +66,7 @@
                         @case('image')
                             @if (!empty($blockData['image']))
                                 <figure class="not-prose my-10">
-                                    <img src="{{ Storage::url($blockData['image']) }}" alt="{{ $blockData['caption'] ?? $post->title }}"
+                                    <img src="{{ Storage::disk('public')->url($blockData['image']) }}" alt="{{ $blockData['caption'] ?? $post->title }}"
                                         loading="lazy" class="w-full rounded-xl border border-stone-200/80 shadow-sm">
                                     @if (!empty($blockData['caption']))
                                         <figcaption class="mt-2.5 text-center text-xs text-stone-500 font-sans">

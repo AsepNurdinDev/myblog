@@ -5,7 +5,7 @@
     @if ($project->thumbnail)
         <a href="{{ route('projects.show', $project) }}" class="block aspect-[16/9] w-full overflow-hidden bg-stone-100">
             <img
-                src="{{ Storage::url($project->thumbnail) }}"
+                src="{{ Storage::disk('public')->url($project->thumbnail) }}"
                 alt="{{ $project->title }}"
                 loading="lazy"
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"

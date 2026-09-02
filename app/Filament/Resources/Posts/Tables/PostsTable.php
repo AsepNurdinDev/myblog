@@ -22,7 +22,9 @@ class PostsTable
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
-                ImageColumn::make('cover_image'),
+                ImageColumn::make('cover_image')
+                    ->disk('public')
+                    ->visibility('public'),
                 TextColumn::make('status')
                     ->badge()
                     ->searchable(),

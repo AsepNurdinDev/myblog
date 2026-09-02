@@ -13,7 +13,7 @@
             <header class="flex flex-col items-start gap-6 border-b border-stone-100 pb-8 sm:flex-row sm:items-center">
                 @if ($profile?->avatar)
                     <img
-                        src="{{ Storage::url($profile->avatar) }}"
+                        src="{{ Storage::disk('public')->url($profile->avatar) }}"
                         alt="{{ $profile->user->name ?? 'Avatar' }}"
                         class="h-28 w-28 shrink-0 rounded-full object-cover shadow-sm ring-4 ring-stone-100"
                     >
