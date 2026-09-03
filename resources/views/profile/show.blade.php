@@ -4,19 +4,67 @@
 @section('meta_description', $profile?->clean_bio ?: ($profile?->headline ?: 'Tentang saya.'))
 
 @section('content')
-    <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 font-sans">
+    <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-16 font-sans">
 
         {{-- Main Profile Card --}}
-        <div class="overflow-hidden rounded-2xl border border-stone-200/80 bg-white p-6 shadow-sm sm:p-10">
+        <div 
+            x-data="{ openAvatar: false }" 
+            class="overflow-hidden rounded-2xl border border-stone-200/80 bg-white p-6 shadow-sm sm:p-10"
+        >
             
             {{-- Header Profile --}}
             <header class="flex flex-col items-start gap-6 border-b border-stone-100 pb-8 sm:flex-row sm:items-center">
                 @if ($profile?->avatar)
-                    <img
-                        src="{{ Storage::disk('public')->url($profile->avatar) }}"
-                        alt="{{ $profile->user->name ?? 'Avatar' }}"
-                        class="h-28 w-28 shrink-0 rounded-full object-cover shadow-sm ring-4 ring-stone-100"
+                    {{-- Tombol Foto Profil (Bisa Diklik) --}}
+                    <button 
+                        type="button" 
+                        @click="openAvatar = true" 
+                        class="group relative h-28 w-28 shrink-0 overflow-hidden rounded-full border border-stone-200 shadow-sm ring-4 ring-stone-100 focus:outline-none focus:ring-stone-400"
                     >
+                        <img
+                            src="{{ Storage::disk('public')->url($profile->avatar) }}"
+                            alt="{{ $profile->user->name ?? 'Avatar' }}"
+                            class="h-full w-full object-cover transition duration-300 group-hover:scale-105 group-hover:brightness-90"
+                        >
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition duration-300 group-hover:opacity-100">
+                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                            </svg>
+                        </div>
+                    </button>
+
+                    {{-- Pop-Up Lightbox Foto Profil --}}
+                    <template x-teleport="body">
+                        <div 
+                            x-show="openAvatar" 
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0"
+                            x-transition:enter-end="opacity-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0"
+                            @keydown.escape.window="openAvatar = false"
+                            class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/80 p-4 backdrop-blur-sm"
+                            style="display: none;"
+                        >
+                            <div class="fixed inset-0" @click="openAvatar = false"></div>
+
+                            <div class="relative z-10 max-w-md overflow-hidden rounded-2xl bg-white p-2 shadow-2xl sm:max-w-lg">
+                                <button 
+                                    @click="openAvatar = false" 
+                                    class="absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-stone-900/60 text-white backdrop-blur-md transition hover:bg-stone-900"
+                                >
+                                    &times;
+                                </button>
+                                
+                                <img 
+                                    src="{{ Storage::disk('public')->url($profile->avatar) }}" 
+                                    alt="{{ $profile->user->name ?? 'Avatar' }}"
+                                    class="max-h-[80vh] w-full rounded-xl object-contain"
+                                >
+                            </div>
+                        </div>
+                    </template>
                 @else
                     <div class="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-stone-900 text-4xl font-bold text-white shadow-sm ring-4 ring-stone-100">
                         {{ Str::of($profile?->user?->name ?? config('app.name', 'A'))->substr(0, 1) }}
@@ -48,7 +96,7 @@
                 </div>
             </header>
 
-            {{-- Bio Section (Support Rich Text HTML + Prose) --}}
+            {{-- Bio Section --}}
             @if ($profile?->bio)
                 <div class="py-8">
                     <h2 class="mb-4 text-xs font-bold uppercase tracking-wider text-stone-400">Tentang Saya</h2>
@@ -58,7 +106,36 @@
                 </div>
             @endif
 
-            {{-- Social Links with Icons --}}
+            {{-- Rekomendasi Fitur Tambahan: Highlight / Core Focus --}}
+            <div class="border-t border-stone-100 py-6">
+                <h2 class="mb-4 text-xs font-bold uppercase tracking-wider text-stone-400">Fokus Utama</h2>
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <div class="rounded-xl border border-stone-200/60 bg-stone-50/50 p-4">
+                        <p class="text-xs font-bold text-stone-900">Backend & API Architecture</p>
+                        <p class="mt-1 text-xs text-stone-500">Membangun arsitektur server yang scalable, clean code, dan RESTful API.</p>
+                    </div>
+                    <div class="rounded-xl border border-stone-200/60 bg-stone-50/50 p-4">
+                        <p class="text-xs font-bold text-stone-900">Modern Web Development</p>
+                        <p class="mt-1 text-xs text-stone-500">Eksplorasi ekosistem Laravel, Blade, Tailwind CSS, dan integrasi UI responsif.</p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Skills Section --}}
+            @if ($profile?->relationLoaded('skills') && $profile->skills->isNotEmpty())
+                <div class="border-t border-stone-100 py-6">
+                    <h2 class="mb-3 text-xs font-bold uppercase tracking-wider text-stone-400">Keahlian & Tech Stack</h2>
+                    <div class="flex flex-wrap gap-2">
+                        @foreach ($profile->skills as $skill)
+                            <span class="rounded-lg border border-stone-200/80 bg-stone-100/70 px-3 py-1 text-xs font-semibold text-stone-700">
+                                {{ $skill->name }}
+                            </span>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            {{-- Social Links --}}
             @php
                 $socials = array_filter([
                     'github' => [
@@ -90,7 +167,7 @@
             @endphp
 
             @if (count($socials) > 0)
-                <div class="border-t border-stone-100 pt-6">
+                <div class="border-t border-stone-100 py-6">
                     <h2 class="mb-3 text-xs font-bold uppercase tracking-wider text-stone-400">Tautan & Media Sosial</h2>
                     <div class="flex flex-wrap gap-2.5">
                         @foreach ($socials as $item)
@@ -110,19 +187,18 @@
                 </div>
             @endif
 
-            {{-- Skills Section --}}
-            @if ($profile?->relationLoaded('skills') && $profile->skills->isNotEmpty())
-                <div class="mt-8 border-t border-stone-100 pt-6">
-                    <h2 class="mb-3 text-xs font-bold uppercase tracking-wider text-stone-400">Keahlian & Tech Stack</h2>
-                    <div class="flex flex-wrap gap-2">
-                        @foreach ($profile->skills as $skill)
-                            <span class="rounded-lg border border-stone-200/80 bg-stone-100/70 px-3 py-1 text-xs font-semibold text-stone-700">
-                                {{ $skill->name }}
-                            </span>
-                        @endforeach
-                    </div>
+            {{-- Rekomendasi Fitur Tambahan: Get in Touch / Direct Email CTA --}}
+            <div class="mt-4 rounded-xl border border-stone-200/80 bg-stone-900 p-6 text-center text-white sm:flex sm:items-center sm:justify-between sm:text-left">
+                <div>
+                    <p class="text-sm font-bold">Tertarik berkolaborasi?</p>
+                    <p class="mt-0.5 text-xs text-stone-400">Terbuka untuk diskusi proyek, konsultasi teknis, atau sekadar bertegur sapa.</p>
                 </div>
-            @endif
+                @if ($profile?->user?->email)
+                    <a href="mailto:{{ $profile->user->email }}" class="mt-4 inline-block rounded-lg bg-white px-4 py-2 text-xs font-semibold text-stone-900 transition hover:bg-stone-200 sm:mt-0 shrink-0">
+                        Kirim Email
+                    </a>
+                @endif
+            </div>
 
         </div>
 

@@ -19,9 +19,13 @@ class CategoryController extends Controller
             ->latest('published_at')
             ->paginate(10);
 
+        // Ambil semua daftar kategori untuk navigasi/filter di view
+        $categories = Category::all();
+
         return view('categories.show', [
-            'category' => $category,
-            'posts' => $posts,
+            'category'   => $category,
+            'posts'      => $posts,
+            'categories' => $categories,
         ]);
     }
 }

@@ -14,7 +14,59 @@
             @endif
         </header>
 
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {{-- Interactive Search Section --}}
+        <section class="mb-10">
+            <form action="{{ route('posts.index') }}" method="GET" class="relative max-w-xl">
+                <div class="relative flex items-center">
+                    <input type="text" name="search" value="{{ request('search') }}"
+                        placeholder="Cari artikel, topik, atau kata kunci..."
+                        class="w-full rounded-xl border border-stone-200/90 bg-white py-3 pl-11 pr-24 text-sm text-stone-800 placeholder-stone-400 shadow-sm transition-all focus:border-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-400">
+                    <div class="pointer-events-none absolute left-3.5 flex items-center justify-center text-stone-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+
+                    @if (request('search'))
+                        <a href="{{ route('posts.index') }}"
+                            class="absolute right-20 text-xs font-semibold text-stone-400 hover:text-stone-600">
+                            Reset
+                        </a>
+                    @endif
+
+                    <button type="submit"
+                        class="absolute right-1.5 rounded-lg bg-stone-900 px-4 py-1.5 text-xs font-semibold text-white transition hover:bg-stone-700">
+                        Cari
+                    </button>
+                </div>
+            </form>
+
+            @if (request('search'))
+                <p class="mt-3 text-xs text-stone-500">
+                    Menampilkan hasil pencarian untuk kata kunci: <span
+                        class="font-semibold text-stone-800">"{{ request('search') }}"</span>
+                </p>
+            @endif
+        </section>
+
+        {{-- Categories Section --}}
+        @if ($categories->isNotEmpty())
+            <section class="mt-16">
+                <h2 class="mb-4 text-2xl font-extrabold tracking-tight text-stone-900">Topik & Kategori</h2>
+                <div class="flex flex-wrap gap-2">
+                    @foreach ($categories as $category)
+                        <a href="{{ route('categories.show', $category) }}"
+                            class="rounded-lg border border-stone-200/80 bg-white px-3.5 py-1.5 text-xs font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-50 hover:text-stone-900">
+                            {{ $category->name }}
+                        </a>
+                    @endforeach
+                </div>
+            </section>
+        @endif
+
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 mt-12">
             @forelse ($posts as $post)
                 <x-post-card :post="$post" />
             @empty

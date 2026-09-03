@@ -20,11 +20,12 @@ class HomeController extends Controller
             ->with('skills')
             ->first();
 
+        // Diubah menjadi 6 post (2 baris x 3 kolom di desktop)
         $latestPosts = Post::query()
             ->where('status', PostStatus::Published)
             ->with(['category', 'tags'])
             ->latest('published_at')
-            ->take(5)
+            ->take(6)
             ->get();
 
         $latestProjects = Project::query()

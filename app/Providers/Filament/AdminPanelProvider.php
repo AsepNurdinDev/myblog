@@ -32,9 +32,9 @@ class AdminPanelProvider extends PanelProvider
             | Branding
             |--------------------------------------------------------------------------
             */
-            ->brandName('Mahakarya Digital')
-            ->brandLogo(asset('images/logo.svg'))
-            ->favicon(asset('images/favicon.svg'))
+            ->brandName('AsepBlog')
+            ->brandLogo(asset('images/asepblog1.png'))
+            ->favicon(asset('images/asepblog.png'))
 
             /*
             |--------------------------------------------------------------------------

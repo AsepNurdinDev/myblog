@@ -2,36 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Enums\CommentStatus;
+use App\Models\Category;
 use App\Models\Enums\PostStatus;
 use App\Models\Post;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    /**
-     * Display a paginated list of published articles.
-     */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $posts = Post::query()
+        $query = Post::query()
             ->where('status', PostStatus::Published)
             ->with(['category', 'tags'])
-            ->latest('published_at')
-            ->paginate(10);
+            ->latest('published_at');
 
-        return view('posts.index', [
-            'posts' => $posts,
-        ]);
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('excerpt', 'like', "%{$search}%");
+            });
+        }
+
+        // Jika opsi 'all' diaktifkan dari tombol, tampilkan seluruh post tanpa batas halaman
+        $showAll = $request->boolean('all');
+        $posts = $showAll ? $query->get() : $query->paginate(18); // Default 3x6 (18 items)
+
+        $categories = Category::all();
+
+        return view('posts.index', compact('posts', 'categories', 'showAll'));
     }
 
-    /**
-     * Display a single published article.
-     *
-     * Route model binding resolves the Post by its slug (see routes/web.php).
-     * Draft or unpublished posts must not be reachable, so we abort with a
-     * 404 instead of leaking their existence.
-     */
     public function show(Post $post): View
     {
         abort_unless($post->status === PostStatus::Published, 404);
@@ -39,13 +40,9 @@ class PostController extends Controller
         $post->load([
             'category',
             'tags',
-            'comments' => fn ($query) => $query
-                ->where('status', CommentStatus::Approved)
-                ->latest(),
+            'comments' => fn ($query) => $query->where('status', \App\Models\Enums\CommentStatus::Approved)->latest(),
         ]);
 
-        return view('posts.show', [
-            'post' => $post,
-        ]);
+        return view('posts.show', compact('post'));
     }
 }
