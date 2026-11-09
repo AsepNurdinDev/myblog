@@ -1,0 +1,51 @@
+
+# Environment files
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Dependencies
+**/vendor/
+**/node_modules/
+
+# Laravel
+/backend/bootstrap/cache/*
+!/backend/bootstrap/cache/.gitignore
+
+/backend/storage/*.key
+/backend/storage/pail
+/backend/public/build/
+/backend/public/hot
+/backend/public/storage
+
+# Next.js
+/frontend/.next/
+/frontend/out/
+/frontend/build/
+
+# Build outputs
+**/dist/
+**/build/
+
+# Testing and cache
+**/.phpunit.cache/
+**/.phpunit.result.cache
+**/coverage/
+**/.cache/
+
+# Logs
+*.log
+
+# IDE and OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.zed/
+.nova/
+.phpactor.json
+
+# Local tools
+.codex/
+.cursor/
