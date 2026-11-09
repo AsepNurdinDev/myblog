@@ -1,0 +1,23 @@
+# Keep Docker build contexts small and prevent local secrets/data entering images.
+.git
+.agents
+.codex
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules
+**/vendor
+**/.next
+**/coverage
+**/storage/logs
+**/storage/framework
+backend/storage/app
+backend/bootstrap/cache/*.php
+frontend/.env.local
+docs
+storage
+infra/compose/.env
+*.log

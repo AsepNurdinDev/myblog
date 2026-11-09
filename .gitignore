@@ -1,0 +1,16 @@
+# Deployment secrets and machine-local configuration
+infra/compose/.env
+*.env.local
+
+# Local runtime state that must not enter source control
+storage/
+backups/
+.superpowers/
+.worktrees/
+worktrees/
+
+# Build/install output
+**/node_modules/
+**/vendor/
+frontend/.next/
+coverage/

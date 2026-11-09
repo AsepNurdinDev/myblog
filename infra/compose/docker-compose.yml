@@ -1,0 +1,137 @@
+name: myblog
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: myblog-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?Set MYSQL_DATABASE in infra/compose/.env}
+      MYSQL_USER: ${MYSQL_USER:?Set MYSQL_USER in infra/compose/.env}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in infra/compose/.env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in infra/compose/.env}
+      TZ: ${TZ:-UTC}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    security_opt:
+      - no-new-privileges:true
+
+  backend:
+    build:
+      context: ../..
+      dockerfile: infra/docker/backend/Dockerfile
+    image: myblog-backend:local
+    container_name: myblog-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: "3306"
+      DB_DATABASE: ${MYSQL_DATABASE:?Set MYSQL_DATABASE in infra/compose/.env}
+      DB_USERNAME: ${MYSQL_USER:?Set MYSQL_USER in infra/compose/.env}
+      DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in infra/compose/.env}
+      FILESYSTEM_DISK: public
+      LOG_CHANNEL: stderr
+      LOG_LEVEL: ${LOG_LEVEL:-warning}
+    volumes:
+      - laravel_storage:/var/www/html/storage
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "php -r '$$socket = @fsockopen(\"127.0.0.1\", 9000); if (! $$socket) { exit(1); } fclose($$socket);'"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 25s
+    security_opt:
+      - no-new-privileges:true
+
+  frontend:
+    build:
+      context: ../..
+      dockerfile: infra/docker/frontend/Dockerfile
+    image: myblog-frontend:local
+    container_name: myblog-frontend
+    restart: unless-stopped
+    profiles: ["frontend"]
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://api.asepblog.online}
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3000').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))\""]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+    security_opt:
+      - no-new-privileges:true
+
+  nginx:
+    image: nginx:1.28-alpine
+    container_name: myblog-nginx
+    restart: unless-stopped
+    ports:
+      # Cloudflared running on NEXUS reaches this loopback-only listener.
+      # Do not change to 0.0.0.0 unless a firewall and ingress review is done.
+      - "${NGINX_BIND_IP:-127.0.0.1}:${NGINX_HTTP_PORT:-8080}:8080"
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../nginx/conf.d:/etc/nginx/conf.d:ro
+      - ../../backend/public:/var/www/html/public:ro
+      - laravel_storage:/var/www/html/storage:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - internal
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx:uid=101,gid=101,mode=0755
+      - /var/run:uid=101,gid=101,mode=0755
+      - /tmp:uid=101,gid=101,mode=1777
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null --header='Host: api.asepblog.online' http://127.0.0.1:8080/up"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+
+networks:
+  internal:
+    name: myblog_internal
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
+
+volumes:
+  mysql_data:
+    name: myblog_mysql_data
+  laravel_storage:
+    name: myblog_laravel_storage
