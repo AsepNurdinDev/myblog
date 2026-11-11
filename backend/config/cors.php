@@ -14,7 +14,7 @@ return [
 
     'allowed_headers' => ['Content-Type', 'Accept', 'Origin'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['Retry-After', 'X-RateLimit-Limit', 'X-RateLimit-Remaining'],
 
     'max_age' => 86400,
 

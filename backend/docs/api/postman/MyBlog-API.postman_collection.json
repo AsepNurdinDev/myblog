@@ -1,0 +1,978 @@
+{
+  "info": {
+    "_postman_id": "e5d908db-4f74-8d20-c2d3-584ea234df40",
+    "name": "MyBlog API",
+    "description": "Public REST API of MyBlog (Laravel). No authentication required. Base URL and version come from the environment.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Homepage",
+      "item": [
+        {
+          "name": "Get homepage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.data).to.have.keys('profile','latest_posts','latest_projects','categories'); });",
+                  "pm.test('Check 2', function () { pm.expect(j.data.latest_posts.length).to.be.at.most(6); });",
+                  "pm.test('Check 3', function () { pm.expect(j.data.latest_projects.length).to.be.at.most(3); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Profile, latest 6 published articles, latest 3 projects and all categories.\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/home",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "home"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Articles",
+      "item": [
+        {
+          "name": "List articles",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j).to.have.property('data'); });",
+                  "pm.test('Check 2', function () { pm.expect(j).to.have.property('meta'); });",
+                  "pm.test('Check 3', function () { pm.expect(j).to.have.property('links'); });",
+                  "if (j.data.length) { pm.environment.set('post_slug', j.data[0].slug); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Paginated published articles. per_page max 50.\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/posts?page=1&per_page=12",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "per_page",
+                  "value": "12",
+                  "disabled": false
+                },
+                {
+                  "key": "search",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "tag",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search articles",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.data).to.be.an('array'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Search by title and excerpt.\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/posts?search=laravel&per_page=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "laravel",
+                  "disabled": false
+                },
+                {
+                  "key": "per_page",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List articles by category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.data).to.be.an('array'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Filter by category slug.\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/posts?category={{category_slug}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "{{category_slug}}",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get article",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.data).to.include.keys('content','seo','category','tags','comments'); });",
+                  "pm.test('Check 2', function () { j.data.comments.forEach(c => pm.expect(c).to.not.have.property('email')); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Full article: blocks, category, tags, approved comments, SEO. Draft/unknown slug returns 404.\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/posts/{{post_slug}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "posts",
+                "{{post_slug}}"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get article (not found)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.message).to.eql('Resource not found.'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Unknown or unpublished slug.\n\nExpected status: 404",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/posts/this-slug-does-not-exist",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "posts",
+                "this-slug-does-not-exist"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "List categories",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.data).to.be.an('array'); });",
+                  "if (j.data.length) { pm.environment.set('category_slug', j.data[0].slug); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "All categories with published article counts.\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "categories"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j).to.have.property('category'); });",
+                  "pm.test('Check 2', function () { pm.expect(j).to.have.property('meta'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Category plus paginated published articles (top-level 'category' key).\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/categories/{{category_slug}}?page=1&per_page=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "categories",
+                "{{category_slug}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "per_page",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get category (not found)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.message).to.eql('Resource not found.'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Unknown category.\n\nExpected status: 404",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/categories/this-slug-does-not-exist",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "categories",
+                "this-slug-does-not-exist"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tags",
+      "item": [
+        {
+          "name": "List tags",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.data).to.be.an('array'); });",
+                  "if (j.data.length) { pm.environment.set('tag_slug', j.data[0].slug); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "All tags with published article counts.\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/tags",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "tags"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get tag",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j).to.have.property('tag'); });",
+                  "pm.test('Check 2', function () { pm.expect(j).to.have.property('meta'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Tag plus paginated published articles (top-level 'tag' key).\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/tags/{{tag_slug}}?page=1&per_page=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "tags",
+                "{{tag_slug}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "per_page",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get tag (not found)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.message).to.eql('Resource not found.'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Unknown tag.\n\nExpected status: 404",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/tags/this-slug-does-not-exist",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "tags",
+                "this-slug-does-not-exist"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "List projects",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j).to.have.property('meta'); });",
+                  "if (j.data.length) { pm.environment.set('project_slug', j.data[0].slug); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Paginated projects (all projects are public).\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/projects?page=1&per_page=9",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "projects"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "per_page",
+                  "value": "9",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get project",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.data).to.include.keys('content','skills','status'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Full project details with skills.\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/projects/{{project_slug}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "projects",
+                "{{project_slug}}"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get project (not found)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.message).to.eql('Resource not found.'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Unknown project.\n\nExpected status: 404",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/projects/this-slug-does-not-exist",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "projects",
+                "this-slug-does-not-exist"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.data).to.not.have.property('email'); });",
+                  "pm.test('Check 2', function () { pm.expect(j.data).to.have.property('skills'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Public profile and skills. Never includes email.\n\nExpected status: 200",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "profile"
+              ],
+              "query": []
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Submit comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j.status).to.eql('pending'); });",
+                  "pm.test('Check 2', function () { pm.expect(j.data).to.not.have.property('email'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Creates a PENDING comment (needs admin approval). Rate limited: 5/min, 30/hour per IP.\n\nExpected status: 201",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/posts/{{post_slug}}/comments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "posts",
+                "{{post_slug}}",
+                "comments"
+              ],
+              "query": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Visitor\",\n  \"email\": \"jane@example.com\",\n  \"content\": \"Great article, thanks for sharing!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Submit comment (validation error)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 422', function () { pm.response.to.have.status(422); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });",
+                  "const j = pm.response.json();",
+                  "pm.test('Check 1', function () { pm.expect(j).to.have.property('errors'); });",
+                  "pm.test('Check 2', function () { pm.expect(j.errors).to.have.keys('name','email','content'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Invalid data returns 422 with field errors.\n\nExpected status: 422",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/posts/{{post_slug}}/comments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "posts",
+                "{{post_slug}}",
+                "comments"
+              ],
+              "query": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"email\": \"not-an-email\",\n  \"content\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Submit comment (article not found)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 404', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Response is JSON', function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "description": "Draft or unknown article returns 404.\n\nExpected status: 404",
+            "url": {
+              "raw": "{{base_url}}/api/{{api_version}}/posts/this-slug-does-not-exist/comments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "{{api_version}}",
+                "posts",
+                "this-slug-does-not-exist",
+                "comments"
+              ],
+              "query": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Visitor\",\n  \"email\": \"jane@example.com\",\n  \"content\": \"Great article, thanks for sharing!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "api_version",
+      "value": "v1"
+    }
+  ]
+}

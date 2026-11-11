@@ -1,0 +1,744 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-11-10T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v10.0.0",
+  "resources": [
+    {
+      "_id": "wrk_742523daef59db4b718409f4",
+      "_type": "workspace",
+      "parentId": null,
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "MyBlog API",
+      "description": "Public REST API of MyBlog (Laravel). No authentication required.",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_ff035a1dd7655da15295fa5f",
+      "_type": "environment",
+      "parentId": "wrk_742523daef59db4b718409f4",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8000",
+        "api_version": "v1",
+        "post_slug": "example-article",
+        "category_slug": "technology",
+        "tag_slug": "laravel",
+        "project_slug": "example-project"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "api_version",
+          "post_slug",
+          "category_slug",
+          "tag_slug",
+          "project_slug"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1762732800000
+    },
+    {
+      "_id": "fld_1478521f20f69671b3d58d87",
+      "_type": "request_group",
+      "parentId": "wrk_742523daef59db4b718409f4",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Homepage",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1762732800000
+    },
+    {
+      "_id": "fld_f014e7846a1aee55b54b117f",
+      "_type": "request_group",
+      "parentId": "wrk_742523daef59db4b718409f4",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Articles",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1762732799999
+    },
+    {
+      "_id": "fld_9e91a139a7baaaa106bfcc11",
+      "_type": "request_group",
+      "parentId": "wrk_742523daef59db4b718409f4",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Categories",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1762732799998
+    },
+    {
+      "_id": "fld_0b0ca363b1dab2e087c3b73a",
+      "_type": "request_group",
+      "parentId": "wrk_742523daef59db4b718409f4",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Tags",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1762732799997
+    },
+    {
+      "_id": "fld_1e7d51cafa4921cf64ca785a",
+      "_type": "request_group",
+      "parentId": "wrk_742523daef59db4b718409f4",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Projects",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1762732799996
+    },
+    {
+      "_id": "fld_00e9736af608078e67bda8a3",
+      "_type": "request_group",
+      "parentId": "wrk_742523daef59db4b718409f4",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Profile",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1762732799995
+    },
+    {
+      "_id": "fld_ac939354d1b6930066b18f9a",
+      "_type": "request_group",
+      "parentId": "wrk_742523daef59db4b718409f4",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Comments",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1762732799994
+    },
+    {
+      "_id": "req_ed07469ce258732406c389b0",
+      "_type": "request",
+      "parentId": "fld_1478521f20f69671b3d58d87",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get homepage",
+      "description": "Profile, latest 6 published articles, latest 3 projects and all categories.\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/home",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732800000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_8a55206ba7124076f3d250b2",
+      "_type": "request",
+      "parentId": "fld_f014e7846a1aee55b54b117f",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "List articles",
+      "description": "Paginated published articles. per_page max 50.\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/posts",
+      "parameters": [
+        {
+          "name": "page",
+          "value": "1",
+          "disabled": false
+        },
+        {
+          "name": "per_page",
+          "value": "12",
+          "disabled": false
+        },
+        {
+          "name": "search",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "category",
+          "value": "",
+          "disabled": true
+        },
+        {
+          "name": "tag",
+          "value": "",
+          "disabled": true
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799999,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_6c2a405f0e98015ae11e367c",
+      "_type": "request",
+      "parentId": "fld_f014e7846a1aee55b54b117f",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Search articles",
+      "description": "Search by title and excerpt.\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/posts",
+      "parameters": [
+        {
+          "name": "search",
+          "value": "laravel",
+          "disabled": false
+        },
+        {
+          "name": "per_page",
+          "value": "10",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799998,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_56debec660a0a5334f48e4f1",
+      "_type": "request",
+      "parentId": "fld_f014e7846a1aee55b54b117f",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "List articles by category",
+      "description": "Filter by category slug.\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/posts",
+      "parameters": [
+        {
+          "name": "category",
+          "value": "{{ _.category_slug }}",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799997,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_4646564379807ca424612ea4",
+      "_type": "request",
+      "parentId": "fld_f014e7846a1aee55b54b117f",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get article",
+      "description": "Full article: blocks, category, tags, approved comments, SEO. Draft/unknown slug returns 404.\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/posts/{{ _.post_slug }}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799996,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_0d42efcfb45fac242d8dd230",
+      "_type": "request",
+      "parentId": "fld_f014e7846a1aee55b54b117f",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get article (not found)",
+      "description": "Unknown or unpublished slug.\n\nExpected status: 404",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/posts/this-slug-does-not-exist",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799995,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_765a8d09e6a52a3f8320fa5f",
+      "_type": "request",
+      "parentId": "fld_9e91a139a7baaaa106bfcc11",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "List categories",
+      "description": "All categories with published article counts.\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/categories",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799994,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_5b39e23349dcef6dd9d5f84a",
+      "_type": "request",
+      "parentId": "fld_9e91a139a7baaaa106bfcc11",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get category",
+      "description": "Category plus paginated published articles (top-level 'category' key).\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/categories/{{ _.category_slug }}",
+      "parameters": [
+        {
+          "name": "page",
+          "value": "1",
+          "disabled": false
+        },
+        {
+          "name": "per_page",
+          "value": "10",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799993,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_745797bb87e328e25bea4529",
+      "_type": "request",
+      "parentId": "fld_9e91a139a7baaaa106bfcc11",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get category (not found)",
+      "description": "Unknown category.\n\nExpected status: 404",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/categories/this-slug-does-not-exist",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799992,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_a442b946fde2dd6eecb2a87b",
+      "_type": "request",
+      "parentId": "fld_0b0ca363b1dab2e087c3b73a",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "List tags",
+      "description": "All tags with published article counts.\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/tags",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799991,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_e05bc70b9e409e289a770e68",
+      "_type": "request",
+      "parentId": "fld_0b0ca363b1dab2e087c3b73a",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get tag",
+      "description": "Tag plus paginated published articles (top-level 'tag' key).\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/tags/{{ _.tag_slug }}",
+      "parameters": [
+        {
+          "name": "page",
+          "value": "1",
+          "disabled": false
+        },
+        {
+          "name": "per_page",
+          "value": "10",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799990,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_14e71413057357a4c607b4a8",
+      "_type": "request",
+      "parentId": "fld_0b0ca363b1dab2e087c3b73a",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get tag (not found)",
+      "description": "Unknown tag.\n\nExpected status: 404",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/tags/this-slug-does-not-exist",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799989,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_9b6f6e5fb7d08faef5f9b6ce",
+      "_type": "request",
+      "parentId": "fld_1e7d51cafa4921cf64ca785a",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "List projects",
+      "description": "Paginated projects (all projects are public).\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/projects",
+      "parameters": [
+        {
+          "name": "page",
+          "value": "1",
+          "disabled": false
+        },
+        {
+          "name": "per_page",
+          "value": "9",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799988,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_eb831c5f832dd852b2e1ad80",
+      "_type": "request",
+      "parentId": "fld_1e7d51cafa4921cf64ca785a",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get project",
+      "description": "Full project details with skills.\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/projects/{{ _.project_slug }}",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799987,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_79ae0d05f23a0b468234dba5",
+      "_type": "request",
+      "parentId": "fld_1e7d51cafa4921cf64ca785a",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get project (not found)",
+      "description": "Unknown project.\n\nExpected status: 404",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/projects/this-slug-does-not-exist",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799986,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_982014ff585e0417136ff049",
+      "_type": "request",
+      "parentId": "fld_00e9736af608078e67bda8a3",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Get profile",
+      "description": "Public profile and skills. Never includes email.\n\nExpected status: 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/profile",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799985,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_53e261333fdfa3247d5d230c",
+      "_type": "request",
+      "parentId": "fld_ac939354d1b6930066b18f9a",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Submit comment",
+      "description": "Creates a PENDING comment (needs admin approval). Rate limited: 5/min, 30/hour per IP.\n\nExpected status: 201",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/posts/{{ _.post_slug }}/comments",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799984,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Jane Visitor\",\n  \"email\": \"jane@example.com\",\n  \"content\": \"Great article, thanks for sharing!\"\n}"
+      }
+    },
+    {
+      "_id": "req_5d820e3e6746f5c021e7145e",
+      "_type": "request",
+      "parentId": "fld_ac939354d1b6930066b18f9a",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Submit comment (validation error)",
+      "description": "Invalid data returns 422 with field errors.\n\nExpected status: 422",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/posts/{{ _.post_slug }}/comments",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799983,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"\",\n  \"email\": \"not-an-email\",\n  \"content\": \"\"\n}"
+      }
+    },
+    {
+      "_id": "req_932fdad976735a334393973f",
+      "_type": "request",
+      "parentId": "fld_ac939354d1b6930066b18f9a",
+      "modified": 1762732800000,
+      "created": 1762732800000,
+      "name": "Submit comment (article not found)",
+      "description": "Draft or unknown article returns 404.\n\nExpected status: 404",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/{{ _.api_version }}/posts/this-slug-does-not-exist/comments",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1762732799982,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Jane Visitor\",\n  \"email\": \"jane@example.com\",\n  \"content\": \"Great article, thanks for sharing!\"\n}"
+      }
+    }
+  ]
+}

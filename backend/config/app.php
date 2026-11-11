@@ -55,6 +55,17 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     /*
+    | Trusted reverse proxies
+    |
+    | Comma-separated IP addresses or CIDR ranges that are allowed to set
+    | forwarded headers. Leave empty unless the app is behind a known proxy.
+    */
+    'trusted_proxies' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', (string) env('TRUSTED_PROXIES', ''))
+    ))),
+
+    /*
     |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------

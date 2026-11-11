@@ -10,14 +10,15 @@
 **/node_modules/
 
 # Laravel
-/backend/bootstrap/cache/*
-!/backend/bootstrap/cache/.gitignore
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
 
-/backend/storage/*.key
-/backend/storage/pail
-/backend/public/build/
-/backend/public/hot
-/backend/public/storage
+/storage/*.key
+/storage/pail
+
+/public/build/
+/public/hot
+/public/storage
 
 # Next.js
 /frontend/.next/
